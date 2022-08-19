@@ -12,7 +12,7 @@ const StyledFooter = styled.h4`
   text-align: ${(props) => props.sidebar === false && "center"};
   bottom: 0;
   margin: 0 auto;
-  background-color: cyan;
+  background-color: #fff;
 `;
 
 const Footer = ({ sidebar, size }) => {
