@@ -25,6 +25,7 @@ const NavIcon = styled(Link)`
 `;
 
 const NavRight = styled.div`
+  background-color: green;
   display: ${(props) => (props.size.w > 768 ? "grid" : "block")};
   margin-left: ${(props) => (props.size.w > 768 ? 0 : "auto")};
   grid-template-columns: ${(props) =>
@@ -50,6 +51,7 @@ const AvatarImg = styled.img`
 
 const DropdownContent = styled.div`
   position: absolute;
+  right: 0;
   margin-top: 50px;
   background-color: #f9f9f9;
   min-width: 160px;
@@ -92,6 +94,7 @@ const Navbar = ({ sidebar, setSidebar, size }) => {
   const showSidebar = () => setSidebar(!sidebar);
 
   const showSubnav = () => setSubnav(!subnav);
+
   return (
     <Nav>
       <NavIcon to="#">
