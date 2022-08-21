@@ -25,7 +25,6 @@ const NavIcon = styled(Link)`
 `;
 
 const NavRight = styled.div`
-  background-color: green;
   display: ${(props) => (props.size.w > 768 ? "grid" : "block")};
   margin-left: ${(props) => (props.size.w > 768 ? 0 : "auto")};
   grid-template-columns: ${(props) =>
