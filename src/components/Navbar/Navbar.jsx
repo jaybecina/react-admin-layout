@@ -4,6 +4,7 @@ import * as FaIcons from "react-icons/fa";
 import styled from "styled-components";
 
 import avatarUserImg from "../../assets/img/avatarUser.png";
+import diyLogo from "../../assets/logo/diyLogo.png";
 
 const Nav = styled.div`
   background: #fff;
@@ -24,8 +25,10 @@ const NavIcon = styled(Link)`
 `;
 
 const NavRight = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, auto);
+  display: ${(props) => (props.size.w > 768 ? "grid" : "block")};
+  margin-left: ${(props) => (props.size.w > 768 ? 0 : "auto")};
+  grid-template-columns: ${(props) =>
+    props.size.w > 768 ? "repeat(5, auto)" : "none"};
   grid-gap: 10px;
   list-style: none;
   text-align: center;
@@ -35,6 +38,7 @@ const NavRight = styled.div`
 `;
 
 const AvatarImg = styled.img`
+  display: ${(props) => (props.size.w > 768 ? "block" : "none")};
   width: 50px;
   height: 50px;
   object-fit: contain;
@@ -73,7 +77,13 @@ const PageHeader = styled.h1`
   margin-left: ${(props) => (props.sidebar ? "235px" : "50px")};
   color: ${(props) => props.color};
   font-size: ${(props) => `${props.fontSize}px`};
-  background-color: red;
+`;
+
+const NavMobileLogo = styled.img`
+  display: ${(props) => (props.size.w > 768 ? "none" : "block")};
+  width: 160px;
+  object-fit: contain;
+  margin: 2px 20px;
 `;
 
 const Navbar = ({ sidebar, setSidebar, size }) => {
@@ -90,8 +100,14 @@ const Navbar = ({ sidebar, setSidebar, size }) => {
       <PageHeader color="#000" fontSize={30} sidebar={sidebar} size={size}>
         Page Title Here
       </PageHeader>
-      <NavRight>
-        <AvatarImg src={avatarUserImg} alt="" onClick={showSubnav} />
+      <NavRight size={size}>
+        <AvatarImg
+          src={avatarUserImg}
+          alt=""
+          onClick={showSubnav}
+          size={size}
+        />
+        <NavMobileLogo src={diyLogo} alt="" size={size} />
         {subnav && (
           <DropdownContent>
             <a href="#">My Profile</a>

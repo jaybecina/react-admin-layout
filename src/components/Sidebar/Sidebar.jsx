@@ -8,9 +8,11 @@ import { IconContext } from "react-icons/lib";
 
 import Navbar from "../Navbar/Navbar";
 
+import diyLogo from "../../assets/logo/diyLogo.png";
+
 const SidebarNav = styled.nav`
   background: #eccac1;
-  width: ${(props) => (props.size.w > 768 ? "250px" : "70%")};
+  width: ${(props) => (props.size.w > 768 ? "250px" : "80%")};
   height: ${(props) => (props.size.w > 768 ? "100vh" : "100%")};
   display: flex;
   justify-content: center;
@@ -23,18 +25,34 @@ const SidebarNav = styled.nav`
 
 const SidebarWrap = styled.div`
   width: 100%;
+  height: ${(props) => `${props.size.h - 160}px`};
+  overflow: auto;
+`;
+
+const NavLogoDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+`;
+
+const SideNavLogo = styled.img`
+  width: 160px;
+  object-fit: contain;
+  margin: 2px 20px;
 `;
 
 const NavIcon = styled(Link)`
-  margin-left: 2rem;
+  margin: 1rem 2rem;
   font-size: 2rem;
-  height: 80px;
+  /* height: 80px; */
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
 `;
 
 const NavMobileLogout = styled.button`
+  display: ${(props) => (props.size.w > 768 ? "none" : "block")};
   margin-left: 2rem;
   margin-bottom: 2rem;
   border-radius: 8px;
@@ -73,10 +91,14 @@ const Sidebar = ({ sidebar, setSidebar, size }) => {
       <IconContext.Provider value={{ color: "#000" }}>
         <Navbar sidebar={sidebar} setSidebar={setSidebar} size={size} />
         <SidebarNav sidebar={sidebar} size={size}>
-          <SidebarWrap>
-            <NavIcon to="#">
-              <AiIcons.AiOutlineClose onClick={showSidebar} />
-            </NavIcon>
+          <SidebarWrap size={size}>
+            <NavLogoDiv>
+              <SideNavLogo src={diyLogo} alt="" />
+              <NavIcon to="#">
+                <AiIcons.AiOutlineLeft onClick={showSidebar} />
+                {/* <AiIcons.AiOutlineClose onClick={showSidebar} /> */}
+              </NavIcon>
+            </NavLogoDiv>
             {SidebarData.map((item, index) => {
               return <SubMenu item={item} key={index} />;
             })}

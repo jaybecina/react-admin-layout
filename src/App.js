@@ -18,10 +18,10 @@ import "./App.css";
 
 const MainContainer = styled.div`
   display: flex;
-  background-color: red;
   margin-top: 20px;
   margin-bottom: 20px;
-  margin-left: ${(props) => (props.sidebar ? "300px" : "50px")};
+  margin-left: ${(props) =>
+    props.sidebar ? (props.size.w > 768 ? "300px" : "50px") : "50px"};
   margin-right: 50px;
   transition: 350ms;
   width: ${(props) => (props.sidebar ? props.size.w - 250 : props.size.w)};
