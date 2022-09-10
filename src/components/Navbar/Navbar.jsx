@@ -1,16 +1,18 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import styled from "styled-components";
 
 import avatarUserImg from "../../assets/img/avatarUser.png";
-import diyLogo from "../../assets/logo/diyLogo.png";
+import myLogo from "../../assets/logo/myLogo.png";
+
+import { headerTitle } from "./HeaderTitleData";
 
 const Nav = styled.div`
   background: #fff;
   height: 80px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #000;
 `;
@@ -20,19 +22,14 @@ const NavIcon = styled(Link)`
   font-size: 2rem;
   height: 80px;
   display: flex;
-  /* justify-content: flex-start; */
   align-items: center;
 `;
 
 const NavRight = styled.div`
   display: ${(props) => (props.size.w > 768 ? "grid" : "block")};
-  margin-left: ${(props) => (props.size.w > 768 ? 0 : "auto")};
-  grid-template-columns: ${(props) =>
-    props.size.w > 768 ? "repeat(5, auto)" : "none"};
-  grid-gap: 10px;
   list-style: none;
   text-align: center;
-  width: 70vw;
+  width: 4rem;
   justify-content: end;
   margin-right: 1.4rem;
 `;
@@ -75,19 +72,24 @@ const DropdownContent = styled.div`
 const PageHeader = styled.h1`
   display: ${(props) => (props.size.w > 768 ? "block" : "none")};
   width: 100%;
-  margin-left: ${(props) => (props.sidebar ? "235px" : "50px")};
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: center;
+  margin-left: ${(props) => (props.sidebar ? "284px" : 0)};
   color: ${(props) => props.color};
   font-size: ${(props) => `${props.fontSize}px`};
 `;
 
 const NavMobileLogo = styled.img`
   display: ${(props) => (props.size.w > 768 ? "none" : "block")};
-  width: 160px;
+  width: 70px;
+  height: 50px;
   object-fit: contain;
-  margin: 2px 20px;
 `;
 
 const Navbar = ({ sidebar, setSidebar, size }) => {
+  const location = useLocation();
+
   const [subnav, setSubnav] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
@@ -100,7 +102,7 @@ const Navbar = ({ sidebar, setSidebar, size }) => {
         <FaIcons.FaBars onClick={showSidebar} />
       </NavIcon>
       <PageHeader color="#000" fontSize={30} sidebar={sidebar} size={size}>
-        Page Title Here
+        {headerTitle(location)}
       </PageHeader>
       <NavRight size={size}>
         <AvatarImg
@@ -109,7 +111,7 @@ const Navbar = ({ sidebar, setSidebar, size }) => {
           onClick={showSubnav}
           size={size}
         />
-        <NavMobileLogo src={diyLogo} alt="" size={size} />
+        <NavMobileLogo src={myLogo} alt="" size={size} />
         {subnav && (
           <DropdownContent>
             <a href="#">My Profile</a>

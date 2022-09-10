@@ -8,7 +8,16 @@ import { IconContext } from "react-icons/lib";
 
 import Navbar from "../Navbar/Navbar";
 
-import diyLogo from "../../assets/logo/diyLogo.png";
+import myLogo from "../../assets/logo/myLogo.png";
+
+const MyProvider = ({ className, children }) => (
+  <IconContext.Provider value={{ className }}>{children}</IconContext.Provider>
+);
+
+const IconProviderStyled = styled(MyProvider)`
+  color: #000;
+  font-size: 1.6rem;
+`;
 
 const SidebarNav = styled.nav`
   background: #eccac1;
@@ -37,9 +46,10 @@ const NavLogoDiv = styled.div`
 `;
 
 const SideNavLogo = styled.img`
-  width: 160px;
+  width: 180px;
+  height: 70px;
   object-fit: contain;
-  margin: 2px 20px;
+  margin: 2px 30px;
 `;
 
 const NavIcon = styled(Link)`
@@ -88,12 +98,12 @@ const Sidebar = ({ sidebar, setSidebar, size }) => {
 
   return (
     <>
-      <IconContext.Provider value={{ color: "#000" }}>
+      <IconProviderStyled>
         <Navbar sidebar={sidebar} setSidebar={setSidebar} size={size} />
         <SidebarNav sidebar={sidebar} size={size}>
           <SidebarWrap size={size}>
             <NavLogoDiv>
-              <SideNavLogo src={diyLogo} alt="" />
+              <SideNavLogo src={myLogo} alt="" />
               <NavIcon to="#">
                 <AiIcons.AiOutlineLeft onClick={showSidebar} />
                 {/* <AiIcons.AiOutlineClose onClick={showSidebar} /> */}
@@ -105,7 +115,7 @@ const Sidebar = ({ sidebar, setSidebar, size }) => {
             <NavMobileLogout size={size}>Logout</NavMobileLogout>
           </SidebarWrap>
         </SidebarNav>
-      </IconContext.Provider>
+      </IconProviderStyled>
     </>
   );
 };
